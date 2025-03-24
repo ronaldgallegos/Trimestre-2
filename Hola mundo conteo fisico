@@ -1,0 +1,37 @@
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_LEDBackpack.h>
+
+// Crear un objeto para la pantalla LED (por ejemplo, de 8x8 píxeles)
+Adafruit_8x8matrix matrix = Adafruit_8x8matrix();
+
+void setup() {
+  // Iniciar comunicación I2C
+  Wire.begin();
+
+  // Iniciar la pantalla LED
+  matrix.begin(HT16K33_I2C_ADDR);
+
+  // Limpiar la pantalla
+  matrix.clear();
+
+  // Mostrar el texto "Hola Mundo"
+  mostrarTexto();
+}
+
+void loop() {
+  // No es necesario hacer nada en el loop, ya que el mensaje se muestra solo una vez
+}
+
+void mostrarTexto() {
+  matrix.clear();  // Limpiar la pantalla
+
+  // Escribir "Hola Mundo" en la pantalla LED
+  matrix.setCursor(0, 0); // Establecer posición inicial
+  matrix.print("Hola Mundo");
+  
+  // Actualizar pantalla para que el texto aparezca
+  matrix.writeDisplay();
+  
+  delay(2000);  // Esperar 2 segundos antes de limpiar
+}
