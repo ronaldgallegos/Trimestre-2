@@ -1,0 +1,26 @@
+```
+import board
+import digitalio
+import adafruit_ssd1306
+import time
+
+Configuración de la pantalla OLED
+oled_reset = digitalio.DigitalInOut(board.D4)
+oled_cs = digitalio.DigitalInOut(board.D5)
+oled_dc = digitalio.DigitalInOut(board.D6)
+spi = board.SPI()
+
+oled = adafruit_ssd1306.SSD1306_SPI(128, 32, spi, oled_dc, oled_reset, oled_cs)
+
+Configuración del conteo
+nombre = "TÚ"
+conteo = 0
+
+while True:
+    oled.fill(0)
+    oled.text(nombre, 0, 0, 1)
+    oled.text("Conteo: " + str(conteo), 0, 15, 1)
+    oled.show()
+    conteo += 1
+    time.sleep(1)
+```
